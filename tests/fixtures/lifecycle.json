@@ -1,0 +1,381 @@
+{
+  "description": "Sample lifecycle fixture written by the candidate to exercise insert, unchanged, change, blocked fetch, interrupted crawl, explicit expiry, reappearance and complete-listing removal. Replace/extend with the official fixture.",
+  "runs": [
+    {
+      "name": "run1",
+      "at": "2026-10-01T10:00:00Z",
+      "listings": [
+        {
+          "id": "reed:100",
+          "source": "reed",
+          "source_job_id": "100",
+          "url": "https://www.reed.co.uk/jobs/x/100",
+          "title": "Data Engineer",
+          "company": "Acme Ltd",
+          "company_logo_url": null,
+          "location": "London",
+          "work_type": "full time",
+          "salary_min": 60000,
+          "salary_max": 70000,
+          "salary_period": "year",
+          "posted_at": "2026-09-30T00:00:00Z",
+          "description": "We are looking for a Data Engineer to build and maintain batch and streaming pipelines on AWS using Python, Spark and Airflow. You will work with analysts to model data in Snowflake, own data quality checks and help migrate legacy ETL jobs. Hybrid working from our London office two days a week. Benefits include pension, private healthcare and 25 days holiday."
+        },
+        {
+          "id": "indeed:abc123",
+          "source": "indeed",
+          "source_job_id": "abc123",
+          "url": "https://uk.indeed.com/viewjob?jk=abc123",
+          "title": "Data Engineer",
+          "company": "Acme",
+          "company_logo_url": null,
+          "location": "London",
+          "work_type": "full time",
+          "salary_min": 60000,
+          "salary_max": 70000,
+          "salary_period": "year",
+          "posted_at": "2026-09-30T00:00:00Z",
+          "description": "Acme is hiring a Data Engineer in London. Build batch and streaming pipelines on AWS with Python, Spark and Airflow; model data in Snowflake with analysts; own data quality checks and migrate legacy ETL jobs. Hybrid, two office days a week. Pension, private healthcare, 25 days holiday."
+        },
+        {
+          "id": "linkedin:900",
+          "source": "linkedin",
+          "source_job_id": "900",
+          "url": "https://www.linkedin.com/jobs/view/900",
+          "title": "Staff Nurse - Band 5",
+          "company": "Leeds Teaching Hospitals NHS Trust",
+          "company_logo_url": null,
+          "location": "Leeds, England, United Kingdom",
+          "work_type": "full time",
+          "salary_min": null,
+          "salary_max": null,
+          "salary_period": null,
+          "posted_at": "2026-09-30T00:00:00Z",
+          "description": "Band 5 Staff Nurse required for a busy surgical ward at Leeds General Infirmary. You will deliver high quality patient care, administer medication, and work as part of a multidisciplinary team. NMC registration required. Full time, rotating shifts."
+        }
+      ],
+      "expect": {
+        "jobs": [
+          {
+            "id": "reed:100",
+            "first_seen_at": "<run:run1>",
+            "last_seen_at": "<run:run1>",
+            "removed_at": null,
+            "canonical_job_id": "A",
+            "content_hash": "r1",
+            "salary_min": 60000
+          },
+          {
+            "id": "indeed:abc123",
+            "first_seen_at": "<run:run1>",
+            "removed_at": null,
+            "canonical_job_id": "A",
+            "content_hash": "i1"
+          },
+          {
+            "id": "linkedin:900",
+            "first_seen_at": "<run:run1>",
+            "removed_at": null,
+            "canonical_job_id": "B",
+            "company": "Leeds Teaching Hospitals NHS Trust",
+            "salary_min": null
+          }
+        ],
+        "report": {
+          "jobs_new": 3,
+          "jobs_changed": 0,
+          "jobs_removed": 0,
+          "jobs_by_source": {
+            "reed": 1,
+            "indeed": 1,
+            "linkedin": 1
+          },
+          "duplicates_linked": 2
+        }
+      }
+    },
+    {
+      "name": "run2_partial",
+      "at": "2026-10-02T10:00:00Z",
+      "interrupted": true,
+      "listings": [
+        {
+          "id": "reed:100",
+          "source": "reed",
+          "source_job_id": "100",
+          "url": "https://www.reed.co.uk/jobs/x/100",
+          "title": "Data Engineer",
+          "company": "Acme Ltd",
+          "company_logo_url": null,
+          "location": "London",
+          "work_type": "full time",
+          "salary_min": 60000,
+          "salary_max": 70000,
+          "salary_period": "year",
+          "posted_at": "2026-09-30T00:00:00Z",
+          "description": "We are looking for a Data Engineer to build and maintain batch and streaming pipelines on AWS using Python, Spark and Airflow. You will work with analysts to model data in Snowflake, own data quality checks and help migrate legacy ETL jobs. Hybrid working from our London office two days a week. Benefits include pension, private healthcare and 25 days holiday."
+        },
+        {
+          "id": "indeed:abc123",
+          "source": "indeed",
+          "source_job_id": "abc123",
+          "url": "https://uk.indeed.com/viewjob?jk=abc123",
+          "title": "Data Engineer",
+          "company": "Acme",
+          "company_logo_url": null,
+          "location": "London",
+          "work_type": "full time",
+          "salary_min": 65000,
+          "salary_max": 75000,
+          "salary_period": "year",
+          "posted_at": "2026-09-30T00:00:00Z",
+          "description": "Acme is hiring a Data Engineer in London. Build batch and streaming pipelines on AWS with Python, Spark and Airflow; model data in Snowflake with analysts; own data quality checks and migrate legacy ETL jobs. Hybrid, two office days a week. Pension, private healthcare, 25 days holiday."
+        }
+      ],
+      "expect": {
+        "jobs": [
+          {
+            "id": "reed:100",
+            "first_seen_at": "<run:run1>",
+            "last_seen_at": "<run:run2_partial>",
+            "removed_at": null,
+            "content_hash": "r1"
+          },
+          {
+            "id": "indeed:abc123",
+            "first_seen_at": "<run:run1>",
+            "last_seen_at": "<run:run2_partial>",
+            "content_hash": "i2",
+            "salary_min": 65000
+          },
+          {
+            "id": "linkedin:900",
+            "last_seen_at": "<run:run1>",
+            "removed_at": null
+          }
+        ],
+        "report": {
+          "jobs_new": 0,
+          "jobs_changed": 1,
+          "jobs_removed": 0
+        }
+      }
+    },
+    {
+      "name": "run3_expiry_and_block",
+      "at": "2026-10-03T10:00:00Z",
+      "listings": [
+        {
+          "id": "reed:100",
+          "status": "expired"
+        },
+        {
+          "id": "indeed:abc123",
+          "status": "blocked",
+          "http_status": 403
+        }
+      ],
+      "seen": [
+        "linkedin:900"
+      ],
+      "expect": {
+        "jobs": [
+          {
+            "id": "reed:100",
+            "removed_at": "<run:run3_expiry_and_block>",
+            "last_seen_at": "<run:run2_partial>",
+            "first_seen_at": "<run:run1>"
+          },
+          {
+            "id": "indeed:abc123",
+            "removed_at": null,
+            "last_seen_at": "<run:run2_partial>",
+            "content_hash": "i2"
+          },
+          {
+            "id": "linkedin:900",
+            "removed_at": null,
+            "last_seen_at": "<run:run3_expiry_and_block>"
+          }
+        ],
+        "report": {
+          "jobs_new": 0,
+          "jobs_changed": 0,
+          "jobs_removed": 1,
+          "jobs_by_source": {
+            "indeed": 1,
+            "linkedin": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "run4_reappear",
+      "at": "2026-10-04T10:00:00Z",
+      "listings": [
+        {
+          "id": "reed:100",
+          "source": "reed",
+          "source_job_id": "100",
+          "url": "https://www.reed.co.uk/jobs/x/100",
+          "title": "Data Engineer",
+          "company": "Acme Ltd",
+          "company_logo_url": null,
+          "location": "London",
+          "work_type": "full time",
+          "salary_min": 60000,
+          "salary_max": 70000,
+          "salary_period": "year",
+          "posted_at": "2026-09-30T00:00:00Z",
+          "description": "We are looking for a Data Engineer to build and maintain batch and streaming pipelines on AWS using Python, Spark and Airflow. You will work with analysts to model data in Snowflake, own data quality checks and help migrate legacy ETL jobs. Hybrid working from our London office two days a week. Benefits include pension, private healthcare and 25 days holiday."
+        },
+        {
+          "id": "reed:101",
+          "source": "reed",
+          "source_job_id": "101",
+          "url": "https://www.reed.co.uk/jobs/x/101",
+          "title": "Warehouse Operative",
+          "company": "Parcel Co",
+          "company_logo_url": null,
+          "location": "Daventry, Northamptonshire",
+          "work_type": "temporary",
+          "salary_min": 11.5,
+          "salary_max": 12.5,
+          "salary_period": "hour",
+          "posted_at": "2026-09-30T00:00:00Z",
+          "description": "Warehouse operative needed for picking and packing in a busy distribution centre near Daventry. Days and nights available, overtime paid at time and a half."
+        }
+      ],
+      "expect": {
+        "jobs": [
+          {
+            "id": "reed:100",
+            "removed_at": null,
+            "first_seen_at": "<run:run1>",
+            "last_seen_at": "<run:run4_reappear>",
+            "content_hash": "r1"
+          },
+          {
+            "id": "reed:101",
+            "first_seen_at": "<run:run4_reappear>",
+            "salary_period": "hour",
+            "work_type": "temporary"
+          },
+          {
+            "id": "indeed:abc123",
+            "removed_at": null
+          },
+          {
+            "id": "linkedin:900",
+            "removed_at": null
+          }
+        ],
+        "report": {
+          "jobs_new": 1,
+          "jobs_changed": 0,
+          "jobs_removed": 0
+        }
+      }
+    },
+    {
+      "name": "run5_complete_listing",
+      "at": "2026-10-05T10:00:00Z",
+      "listings": [
+        {
+          "id": "reed:100",
+          "source": "reed",
+          "source_job_id": "100",
+          "url": "https://www.reed.co.uk/jobs/x/100",
+          "title": "Data Engineer",
+          "company": "Acme Ltd",
+          "company_logo_url": null,
+          "location": "London",
+          "work_type": "full time",
+          "salary_min": 60000,
+          "salary_max": 70000,
+          "salary_period": "year",
+          "posted_at": "2026-09-30T00:00:00Z",
+          "description": "We are looking for a Data Engineer to build and maintain batch and streaming pipelines on AWS using Python, Spark and Airflow. You will work with analysts to model data in Snowflake, own data quality checks and help migrate legacy ETL jobs. Hybrid working from our London office two days a week. Benefits include pension, private healthcare and 25 days holiday."
+        }
+      ],
+      "complete_sources": [
+        "reed"
+      ],
+      "expect": {
+        "jobs": [
+          {
+            "id": "reed:100",
+            "removed_at": null,
+            "last_seen_at": "<run:run5_complete_listing>"
+          },
+          {
+            "id": "reed:101",
+            "removed_at": "<run:run5_complete_listing>",
+            "first_seen_at": "<run:run4_reappear>"
+          },
+          {
+            "id": "indeed:abc123",
+            "removed_at": null
+          },
+          {
+            "id": "linkedin:900",
+            "removed_at": null
+          }
+        ],
+        "report": {
+          "jobs_new": 0,
+          "jobs_changed": 0,
+          "jobs_removed": 1
+        }
+      }
+    },
+    {
+      "name": "run6_idempotent_rerun",
+      "at": "2026-10-05T10:00:00Z",
+      "listings": [
+        {
+          "id": "reed:100",
+          "source": "reed",
+          "source_job_id": "100",
+          "url": "https://www.reed.co.uk/jobs/x/100",
+          "title": "Data Engineer",
+          "company": "Acme Ltd",
+          "company_logo_url": null,
+          "location": "London",
+          "work_type": "full time",
+          "salary_min": 60000,
+          "salary_max": 70000,
+          "salary_period": "year",
+          "posted_at": "2026-09-30T00:00:00Z",
+          "description": "We are looking for a Data Engineer to build and maintain batch and streaming pipelines on AWS using Python, Spark and Airflow. You will work with analysts to model data in Snowflake, own data quality checks and help migrate legacy ETL jobs. Hybrid working from our London office two days a week. Benefits include pension, private healthcare and 25 days holiday."
+        }
+      ],
+      "complete_sources": [
+        "reed"
+      ],
+      "expect": {
+        "jobs": [
+          {
+            "id": "reed:100",
+            "removed_at": null
+          },
+          {
+            "id": "reed:101",
+            "removed_at": "<run:run5_complete_listing>"
+          },
+          {
+            "id": "indeed:abc123"
+          },
+          {
+            "id": "linkedin:900"
+          }
+        ],
+        "report": {
+          "jobs_new": 0,
+          "jobs_changed": 0,
+          "jobs_removed": 0
+        }
+      }
+    }
+  ]
+}

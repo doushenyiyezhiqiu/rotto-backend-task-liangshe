@@ -1,0 +1,98 @@
+{
+  "started_at": "2026-10-08T20:14:00.431539+00:00",
+  "finished_at": "2026-10-08T20:20:21.441895+00:00",
+  "requests_total": 2142,
+  "requests_blocked": 8,
+  "requests_by_status": {
+    "200": 2129,
+    "403": 6,
+    "404": 4,
+    "429": 2,
+    "network_error": 1
+  },
+  "jobs_by_source": {
+    "indeed": 150,
+    "linkedin": 150,
+    "reed": 150
+  },
+  "duplicates_linked": 34,
+  "jobs_new": 450,
+  "jobs_removed": 0,
+  "jobs_changed": 0,
+  "estimated_cost_usd": 6.2047,
+  "run_id": 2,
+  "jobs_live_total": 450,
+  "distinct_canonical_jobs_live": 433,
+  "jobs_reappeared": 0,
+  "bytes_total": 775592963,
+  "blocked_by_reason": {
+    "indeed:cloudflare_challenge": 6,
+    "linkedin:rate_limited": 2
+  },
+  "requests_by_source": {
+    "indeed": {
+      "requests": 286,
+      "blocked": 6,
+      "bytes": 255136624
+    },
+    "linkedin": {
+      "requests": 676,
+      "blocked": 2,
+      "bytes": 25603091
+    },
+    "reed": {
+      "requests": 1180,
+      "blocked": 0,
+      "bytes": 494853248
+    }
+  },
+  "status": "finished",
+  "resumed_from_run": null,
+  "dedupe": {
+    "groups": 433,
+    "duplicates_linked": 34,
+    "canonical_updates": 17
+  },
+  "errors": {},
+  "sources": {
+    "reed": {
+      "shards": 60,
+      "shards_complete": 7,
+      "search_pages": 1029,
+      "cards": 25648,
+      "details_attempted": 150,
+      "details_live": 150,
+      "details_expired": 0,
+      "details_not_found": 0,
+      "details_blocked": 0,
+      "details_unparseable": 0,
+      "invalid_skipped": 0
+    },
+    "indeed": {
+      "shards": 60,
+      "shards_complete": 60,
+      "search_pages": 120,
+      "cards": 900,
+      "details_attempted": 150,
+      "details_live": 150,
+      "details_expired": 0,
+      "details_not_found": 0,
+      "details_blocked": 0,
+      "details_unparseable": 0,
+      "invalid_skipped": 0
+    },
+    "linkedin": {
+      "shards": 60,
+      "shards_complete": 4,
+      "search_pages": 524,
+      "cards": 5226,
+      "details_attempted": 150,
+      "details_live": 150,
+      "details_expired": 0,
+      "details_not_found": 0,
+      "details_blocked": 0,
+      "details_unparseable": 0,
+      "invalid_skipped": 0
+    }
+  }
+}
